@@ -7,4 +7,4 @@ WORKDIR /securepass/
 
 COPY . .
 RUN ls
-RUN cd backend && pip install pipenv && pipenv install --system
+RUN cd backend && ls && python -m pip install --upgrade pip && pip install pipenv && pipenv install --system --deploy
