@@ -8,6 +8,7 @@ argon2-cffi = "*"
 python-dotenv = "*"
 django = "*"
 psycopg2-binary = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

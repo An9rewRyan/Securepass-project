@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -102,9 +105,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ALLOWED_HOSTS = [
+    "chrome-extension://hkmhnchiimfpnmcacjmepoinfpeljeha", 
+    "127.0.0.1",
+    ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
+CORS_ALLOWED_ORIGINS = [
+    "chrome-extension://hkmhnchiimfpnmcacjmepoinfpeljeha", 
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "chrome-extension://hkmhnchiimfpnmcacjmepoinfpeljeha", 
+    'http://localhost:8000',
+]
 
 LANGUAGE_CODE = 'en-us'
 
