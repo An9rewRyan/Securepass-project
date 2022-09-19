@@ -1,0 +1,5 @@
+Pipfile.lock
+backend/__pycache__
+backend/core/__pycache__
+backend/.env
+backend/main/migrations
