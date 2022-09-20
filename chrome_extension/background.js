@@ -8,6 +8,7 @@ chrome.runtime.onMessage.addListener(
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-TOKEN': request.csrf,
               },
               method: "POST",
               credentials: 'include',

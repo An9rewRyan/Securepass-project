@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'main',
     'corsheaders',
+    "rest_framework",
+    "rest_framework.authtoken",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -115,6 +117,7 @@ PASSWORD_HASHERS = [
 ALLOWED_HOSTS = [
     "chrome-extension://hkmhnchiimfpnmcacjmepoinfpeljeha", 
     "127.0.0.1",
+    "localhost"
     ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -124,9 +127,11 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "chrome-extension://hkmhnchiimfpnmcacjmepoinfpeljeha", 
+    "chrome-extension://hkmhnchiimfpnmcacjmepoinfpeljeha",
+    'http://127.0.0.1:8000', 
     'http://localhost:8000',
 ]
+
 
 LANGUAGE_CODE = 'en-us'
 
@@ -144,7 +149,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR.parent, 'frontend', 'css'),
 ] 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'frontend', 'media')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

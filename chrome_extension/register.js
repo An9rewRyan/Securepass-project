@@ -2,8 +2,6 @@ const form = document.getElementById('superform')
 
 form.addEventListener("submit", register, false);
 
-
-
 async function register(event){
 	event.preventDefault();
     const username = document.getElementById('username').value
