@@ -13,7 +13,15 @@ chrome.runtime.onMessage.addListener(
               body: JSON.stringify({username: request.username, email: request.email, password: request.password})
             })
             .then(response => response.json())
-            .then(response => sendResponse({message: response}))
+            .then(response => {
+                console.log("response: ",response)
+                chrome.storage.local.set({"access_token": response.access_token}, function() {
+                    console.log('Value is set to ' + response.access_token);
+                  });
+                chrome.storage.local.get(['access_token'], function(result) {
+                    console.log('Value currently is ' + result.access_token);
+                });
+            })
             .catch(error => console.log(error))
 
         return true; 
