@@ -1,10 +1,17 @@
-FROM python:3.9
+# Pull base image
+FROM python:3.10
 
+# Set environment varibles
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /securepass/
+WORKDIR /code/
 
-COPY . .
-RUN ls
-RUN cd backend && ls && python -m pip install --upgrade pip && pip install pipenv && pipenv install --system --deploy
+# Install dependencies
+RUN pip install pipenv
+COPY Pipfile Pipfile.lock /code/
+RUN pipenv install --system --dev
+
+COPY . /code/
+
+EXPOSE 8000

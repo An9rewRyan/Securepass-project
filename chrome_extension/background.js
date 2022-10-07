@@ -1,17 +1,15 @@
 let serverhost = 'http://127.0.0.1:8000'
 
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        var url = serverhost + '/register/'
+    function(request, sendResponse) {
+        var url = serverhost + '/signup'
         console.log(request)
         fetch(url,{
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRF-TOKEN': request.csrf,
+                'Content-Type': 'application/json',
               },
               method: "POST",
-              credentials: 'include',
               body: JSON.stringify({username: request.username, email: request.email, password: request.password})
             })
             .then(response => response.json())
