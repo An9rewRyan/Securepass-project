@@ -6,6 +6,7 @@ from schema import User as SchemaUser
 from schema import Token
 from .utils import *
 from .env import *
+from asyncpg.exceptions import UniqueViolationError
 
 router = APIRouter()
 
@@ -44,7 +45,15 @@ async def login_for_access_token(user: SchemaUser):
 async def signup(user: SchemaUser):
     hashed_password = encode(user.password)
     user.password = hashed_password
-    user_id = await ModelUser.create(user=user.dict())
+    try:
+        user_id = await ModelUser.create(user=user.dict())
+    except UniqueViolationError:
+        raise HTTPException(
+            status_code=500,
+            detail="Username of email is not uniq",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
     if user_id:
         return generate_token(user.username)
     else:
