@@ -153,4 +153,4 @@ class PasswordChecker extends  React.Component {
     }
 }
 
-export {SignupForm}
+export default SignupForm

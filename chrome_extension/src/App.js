@@ -1,16 +1,15 @@
-import './App.css';
-import {SignupForm} from './signup'
+import React from "react";
+import Routing from "./Router";
 
-function App() {
-  return (
-    <div className="App">
-      <SignupForm/>
-    </div>
-  );
+class App extends React.Component {
+  render(){
+    return(
+      <Routing/>
+    )
+  }
 }
 
-
-
 export default App;
+
 
 
