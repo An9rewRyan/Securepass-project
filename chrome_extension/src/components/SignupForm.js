@@ -1,5 +1,8 @@
 /*global chrome*/
 import React from 'react';
+import {
+  Navigate
+} from 'react-router-dom';
 
 let serverhost = 'http://127.0.0.1:8000'
 
@@ -11,7 +14,8 @@ class SignupForm extends React.Component {
             name: "",
             email: "",
             password: "",
-          }
+          },
+        registred: false,
         };
 
       this.handleChange = this.handle_change.bind(this);
@@ -66,13 +70,16 @@ class SignupForm extends React.Component {
           console.log('Value currently is ' + result.access_token);
         });
         alert("You sucessfully registered to Securepass project!")
-        return {"status":"sucess"}
+        this.setState({registred: true})
+        console.log(this.state)
         }
     }
 
     render() {
-      return (
+      let registred = this.state.registred
+      return(
           <div>
+            {registred && <Navigate to={"/home"} replace={true} />}
           <h2>Welcome to Securepass project!</h2>
           <form onSubmit={this.handleSubmit}>
               <label>

@@ -1,22 +1,26 @@
 /*global chrome*/
 import React from 'react';
 
-class HomePage extends React.Component{
+class AboutPage extends React.Component{
     render(){
         return(
             <div>
-                <h1>What is Securepass project?</h1>
-                <h2>This is a Software, You can trust!</h2>
-                <h3>What we do: </h3>
-                <ul>
-                    <li>Storing your sensitive data hashed with the latest secure algorithms </li>
-                    <li>Protecting your account with 3-factor authentication</li>
-                    <li>Reminding you to change password every week</li>
-                </ul>
-                <strong>AND THIS ALL FOR FREE!</strong>
+                <h1>Congratulations!</h1>
+                <h2>You sucessfully registered!</h2>
+                <form>
+                    <label>
+                        Site_url:
+                    </label>
+                    <input type="text"/>          
+                    <label>
+                        Password:
+                    </label>
+                    <input type="password"/>
+                    <input type="submit" value="Add new password"/>
+                </form>
             </div>
         )
     }
 }
 
-export default HomePage;
+export default AboutPage;
