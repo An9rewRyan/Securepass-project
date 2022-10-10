@@ -16,8 +16,10 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 async def authenticate_user(username: str, password: str):
     user = await get_user(username)
     if not user:
+        print("USer dont exist")
         return False
     if not verify(user.password, password) :
+        print("PAss dont match")
         return False
     return user
 

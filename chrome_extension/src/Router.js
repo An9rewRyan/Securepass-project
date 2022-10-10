@@ -9,11 +9,11 @@ import {
         // useLocation,
         // RouteMatch
     } from 'react-router-dom';
-import SignupForm from "./components/SignupForm";
+import SignupForm from "./components/authentication/SignupForm";
+import SigninForm from "./components/authentication/SigninForm";
 import AboutPage from "./components/About";
 import HomePage from "./components/Home";
 import React from "react";
-import { checkPropTypes } from 'prop-types';
 
 let serverhost = 'http://127.0.0.1:8000'
 
@@ -78,11 +78,11 @@ class Routing extends React.Component{
                     {!checked &&
                         <p>loading...</p>
                     }
-                    {(no_token || checked && !registered) &&
+                    {/* {(no_token || checked && !registered) && */}
                         <li>
                             <Link to="/signup">Signup</Link>
                         </li>
-                    }
+                    {/* } */}
                     {(no_token || checked && registered && !token_valid) &&
                         <li>
                             <Link to="/signin">Signin</Link>
@@ -98,7 +98,7 @@ class Routing extends React.Component{
                     <Routes>
                         <Route exact path='/about' element={< AboutPage />}></Route>
                         <Route exact path='/signup' element={< SignupForm />}></Route>
-                        <Route exact path='/signin' element={< SignupForm />}></Route>
+                        <Route exact path='/signin' element={< SigninForm />}></Route>
                         <Route exact path='/home' element={< HomePage />}></Route>
                     </Routes>
                 </div>

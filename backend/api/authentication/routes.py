@@ -12,10 +12,6 @@ from datetime import datetime
 
 router = APIRouter()
 
-# class Token(BaseModel):
-#     access_token: str
-#     token_type: str
-
 @router.post("/check", response_model=TokenStatus)
 async def is_token_valid(token: Token):
     token_status =  await check_token(token.access_token)
@@ -52,3 +48,15 @@ async def signup(user: SchemaUser):
             status_code=status.HTTP_400_BAD_REQUEST,
             headers={"WWW-Authenticate": "Bearer"}
         ) 
+
+@router.post("/signin", response_model=Token)
+async def signin(user: SchemaUser):
+    user_ok = await authenticate_user(user.username, user.password)
+    if not user_ok:
+        raise HTTPException(
+            status_code=401,
+            detail="Username or creedentials are invalid",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    return generate_token(user.username)
