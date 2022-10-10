@@ -11,6 +11,10 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+class TokenStatus(BaseModel):
+    status: str
+    explain: str
+
 class TokenData(BaseModel):
     username: str | None = None
 

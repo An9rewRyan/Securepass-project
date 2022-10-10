@@ -1,34 +1,25 @@
+from turtle import pen
 from crypto.encode import encode
 from fastapi import Body, HTTPException, status, APIRouter
 from jose import JWTError, jwt
 from models import User as ModelUser
 from schema import User as SchemaUser 
-from schema import Token
+from schema import Token, TokenStatus
 from .utils import *
 from .env import *
 from asyncpg.exceptions import UniqueViolationError
+from datetime import datetime
 
 router = APIRouter()
 
-@router.post("/user", response_model=SchemaUser)
-async def get_current_user(token: str = Body()):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-    except JWTError:
-        raise credentials_exception
-    user = await get_user(username=username)
-    if user is None:
-        raise credentials_exception
-    return user
+# class Token(BaseModel):
+#     access_token: str
+#     token_type: str
 
+@router.post("/check", response_model=TokenStatus)
+async def is_token_valid(token: Token):
+    token_status =  await check_token(token.access_token)
+    return token_status
 
 @router.post("/token", response_model=Token)
 async def login_for_access_token(user: SchemaUser):

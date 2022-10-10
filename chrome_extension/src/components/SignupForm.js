@@ -15,13 +15,11 @@ class SignupForm extends React.Component {
             email: "",
             password: "",
           },
-        registred: false,
         };
 
       this.handleChange = this.handle_change.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-
     handle_change(event) {
         const field = event.target.name;
         const user = this.state.user;
@@ -50,7 +48,7 @@ class SignupForm extends React.Component {
           response_json = await response.json()
         }
         catch(error){
-          alert(error)
+          console.log(error)
           return error
         }
         return response_json.access_token; 
@@ -62,13 +60,15 @@ class SignupForm extends React.Component {
       const email = this.state.user.email
       const password = this.state.user.password
       let token = await this.get_token(username, email, password)
+      let tok_ = ""
       if (!(token instanceof Error)){
         chrome.storage.local.set({"access_token": token}, function() {
           console.log('Value is set to ' + token);
           });
         chrome.storage.local.get(['access_token'], function(result) {
-          console.log('Value currently is ' + result.access_token);
+          console.log(result.access_token);
         });
+        console.log(tok_)
         alert("You sucessfully registered to Securepass project!")
         this.setState({registred: true})
         console.log(this.state)
