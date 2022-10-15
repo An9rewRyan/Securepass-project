@@ -4,7 +4,9 @@ import Routing from "./Router";
 class App extends React.Component {
   render(){
     return(
-      <Routing/>
+      <div>
+        <Routing/>
+      </div>
     )
   }
 }

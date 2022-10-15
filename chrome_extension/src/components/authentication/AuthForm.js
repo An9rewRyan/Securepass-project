@@ -1,7 +1,7 @@
 /*global chrome*/
 import React from 'react';
 import {
-  Navigate
+  Navigate, 
 } from 'react-router-dom';
 import { AbsPassChecker} from './AbsPassChecker';
 
@@ -52,7 +52,7 @@ class AuthForm extends React.Component {
           return error
         }
         return response_json.access_token; 
-      }
+    }
       
     async handleSubmit(event){
       event.preventDefault();
